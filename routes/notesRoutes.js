@@ -12,9 +12,9 @@ const {
 
 const authMiddleware = require("../middlewares/authMiddleware");
 
+notesRouter.post("/", authMiddleware, createNote);
 notesRouter.get("/", authMiddleware, getNotes);
 notesRouter.get("/:id", authMiddleware, getNote);
-notesRouter.post("/", authMiddleware, createNote);
 notesRouter.put("/:id", authMiddleware, updateNote);
 notesRouter.delete("/:id", authMiddleware, deleteNote);
 
