@@ -28,6 +28,23 @@ const createNote = async (req, res) => {
   }
 };
 
+// get all notes
+const getNotes = async (req, res) => {
+  try {
+    const notes = await Notes.find({ user: req.user.id });
+
+    if (notes) {
+      return res.status(200).json([notes]);
+    }
+  } catch (error) {
+    res.status(400).json({
+      message: "Error getting notes",
+      error,
+    });
+  }
+};
+
 module.exports = {
   createNote,
+  getNotes,
 };
