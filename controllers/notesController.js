@@ -111,9 +111,34 @@ const updateNote = async (req, res) => {
   }
 };
 
+// Delete a note
+const deleteNote = async (req, res) => {
+  try {
+    const note = await Notes.findByIdAndDelete(req.params.id);
+    if (!note) {
+      return res.status(405).json({
+        message: "Note not found",
+      });
+    }
+
+    if (note.user.toString() !== req.user.id)
+      return res.status(403).json({ message: "Access denied" });
+
+    res.status(200).json({
+      message: "Note deleted successfully",
+    });
+  } catch (error) {
+    res.status(400).json({
+      message: "Error deleting note",
+      error,
+    });
+  }
+};
+
 module.exports = {
   createNote,
   getNotes,
   getNote,
   updateNote,
+  deleteNote,
 };

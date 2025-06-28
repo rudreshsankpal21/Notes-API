@@ -16,6 +16,6 @@ notesRouter.get("/", authMiddleware, getNotes);
 notesRouter.get("/:id", authMiddleware, getNote);
 notesRouter.post("/", authMiddleware, createNote);
 notesRouter.put("/:id", authMiddleware, updateNote);
-// notesRouter.delete("/:id", authMiddleware, deleteNote);
+notesRouter.delete("/:id", authMiddleware, deleteNote);
 
 module.exports = notesRouter;
