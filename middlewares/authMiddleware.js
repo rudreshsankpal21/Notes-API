@@ -6,7 +6,7 @@ const authMiddleware = async (req, res, next) => {
 
   if (!token) {
     res.status(401).json({
-      message: "Unauthorized token",
+      message: "Missing token",
     });
   }
 
@@ -22,7 +22,7 @@ const authMiddleware = async (req, res, next) => {
     next();
   } catch (error) {
     res.status(401).json({
-      message: "Unauthorized",
+      message: "Invalid token",
       error,
     });
   }

@@ -6,6 +6,8 @@ const notesRouter = require("./routes/notesRoutes");
 const app = express();
 const port = process.env.PORT || 5000;
 
+app.use(express.json());
+
 // Connect Database
 connectDB();
 
@@ -14,5 +16,5 @@ app.use("/api/auth", authRoutes);
 app.use("/api/notes", notesRouter);
 // start server
 app.listen(port, () => {
-  console.log(`http;//localhost${port}`);
+  console.log(`http://localhost:${port}`);
 });
