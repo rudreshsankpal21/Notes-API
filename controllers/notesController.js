@@ -44,7 +44,32 @@ const getNotes = async (req, res) => {
   }
 };
 
+// get note by id
+const getNote = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id);
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found",
+      });
+    }
+
+    const note = await Notes.findById(req.params.id);
+    if (!note) {
+      return res.status(403).json({
+        message: "Note not found",
+      });
+    }
+    res.status(200).json(note);
+  } catch (error) {
+    res.status(400).json({
+      message: "Error getting note",
+      error,
+    });
+  }
+};
 module.exports = {
   createNote,
   getNotes,
+  getNote,
 };
